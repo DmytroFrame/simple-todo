@@ -1,2 +1,2 @@
-export * from './openapi.config'
-export * from './typeorm.config'
+export * from './openapi.config';
+export * from './typeorm.config';

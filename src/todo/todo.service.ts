@@ -1,6 +1,6 @@
 import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { IsNull, MoreThan, Not, Repository } from 'typeorm';
+import { IsNull, Not, Repository } from 'typeorm';
 import { CreateTodoDto } from './dto/create-todo.dto';
 import { UpdateTodoDto } from './dto/update-todo.dto';
 import { TodoEntity } from './entities/todo.entity';
@@ -25,14 +25,14 @@ export class TodoService {
       withDeleted: true,
       select: ['id', 'name', 'description', 'isDone', 'createdAt', 'updatedAt', 'deleteAt'],
       order: { updatedAt: 'DESC' },
-      where: { deleteAt: Not(IsNull()), isDone: findDoneTodo }
-    })
+      where: { deleteAt: Not(IsNull()), isDone: findDoneTodo },
+    });
   }
 
   async findOne(id: number): Promise<TodoEntity> {
-    const response = await this.todoRepository.findOneBy({ id })
+    const response = await this.todoRepository.findOneBy({ id });
     if (!response) {
-      throw new NotFoundException(`Todo by id: ${id} not found.`)
+      throw new NotFoundException(`Todo by id: ${id} not found.`);
     }
     return response;
   }
@@ -40,20 +40,19 @@ export class TodoService {
   async update(id: number, updateTodoDto: UpdateTodoDto): Promise<TodoEntity> {
     const response = await this.todoRepository.update(id, updateTodoDto);
     if (!response.affected) {
-      throw new ConflictException(`Toto was not successfully updated.`)
-    } 
-    return await this.findOne(id)
-
+      throw new ConflictException(`Toto was not successfully updated.`);
+    }
+    return await this.findOne(id);
   }
 
-  async remove(id: number): Promise<Object> {
-    const response = await this.todoRepository.softDelete(id)
+  async remove(id: number): Promise<object> {
+    const response = await this.todoRepository.softDelete(id);
     if (!response.affected) {
-      throw new ConflictException(`Todo was not successfully deleted.`)  
-    } 
+      throw new ConflictException(`Todo was not successfully deleted.`);
+    }
     return {
       statusCode: 200,
-      message: "Todo deleted successfully."
-    }
+      message: 'Todo deleted successfully.',
+    };
   }
 }

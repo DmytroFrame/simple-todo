@@ -3,7 +3,6 @@ import { TypeOrmModuleOptions, TypeOrmOptionsFactory } from '@nestjs/typeorm';
 
 @Injectable()
 export class TypeOrmConfig implements TypeOrmOptionsFactory {
-
   createTypeOrmOptions(): TypeOrmModuleOptions {
     return {
       type: 'sqlite',
