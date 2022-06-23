@@ -24,14 +24,17 @@
 
 ## Description
 
-- Author - Dmytro Kostyshyn > kostyshyn.dmytro@ukd.edu.ua
+- Author - Dmytro Kostyshyn - kostyshyn.dmytro@ukd.edu.ua
 - Group - ІПЗс-2019
 
 ## Running in Docker
 
 ```bash
-# build
-$ npm run start
+# build docker container
+$ docker build -t simple-todo .
+
+# start docker container
+$ docker run -p 3000:3000 simple-todo
 ```
 
 ## Running if you have installed Node.js
@@ -46,6 +49,9 @@ $ npm run build
 # start project
 $ npm run start:prod
 ```
+
+## Urls
+- Swagger docs - localhost:3000
 
 ## License
 Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
